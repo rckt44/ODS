@@ -1,0 +1,11 @@
+ods listing close;
+ods excel 
+file="&qaoutput\qa_&curr_mnth..xlsx"
+style=seasideprinter
+options(sheet_interval="NONE" sheet_name="qa_old_to_new" );
+proc print data=qa.old_to_new noobs ;
+	var ClientID pos hic_&lst_mnth. hic_&curr_mnth. diff;
+	sum hic_&lst_mnth. hic_&curr_mnth. diff ;
+run;
+ods excel close;
+ods listing;

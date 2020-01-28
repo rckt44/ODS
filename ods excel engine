@@ -1,0 +1,41 @@
+/*excel excel*/
+
+/*excel*/
+ods excel file="&path.\Lst\_.xlsx" style=minimal
+options(sheet_interval="NONE" sheet_name="_ " );
+ 
+ proc print data=_._;
+ run;
+/**/
+ ods excel close;
+ ods listing;
+
+ /*excel multiple sheet export*/
+ods excel file="path\Lst\_.xlsx" style=minimal
+options(sheet_name="_" );
+ 
+ proc print data=_._;
+ run;
+
+ options (sheet_name="_");
+ proc print data=_._;
+ var origin;
+ run;
+
+/**/
+ ods excel close;
+ ods listing;
+
+~~ods export
+	ods excel file="path\test\Lst\abc111.xlsx"
+	options(shet_interval="bygroup"
+	supress_bylines="yes"
+	sheet_label="country"
+	embedded_titles="yes"
+	embed_titles_once="yes");
+
+	title "this is it";
+	proc print data=a;
+	by age;
+	run;
+	ods excel close;
